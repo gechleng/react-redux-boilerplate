@@ -1,5 +1,7 @@
 ## How to start project
+
 ```
+git clone https://github.com/gechleng/react-redux-boilerplate.git
 npm install
 npm start
 ```
