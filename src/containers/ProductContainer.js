@@ -77,6 +77,8 @@ class ProductContainer extends Component {
 
   render() {
     const { category, product } = this.state;
+    console.log('product', this.props.product);
+    console.log('cate',this.props.category);
     return (
       <div>
         <CreateProduct

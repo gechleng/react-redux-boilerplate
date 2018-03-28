@@ -1,15 +1,23 @@
 import React from 'react';
+import { Modal } from 'antd';
+
 import CategoryForm from './CategoryForm';
 
-const EditCategory = ({category, handleSubmit, handleSetState}) =>
-  <div style={{backgroundColor: '#ffecb3', padding: 10, marginBottom: 10}}>
-    <h1>Edit Category</h1>
-    <CategoryForm
-      handleSubmit={handleSubmit}
-      handleSetState={handleSetState}
-      category={category}
-      edit={true}
-    />
+const EditCategory = ({category, handleSubmit, handleSetState, visible, toggoleModal}) =>
+  <div>
+    <Modal title="Edit Category"
+      visible={visible}
+      onOk={handleSubmit}
+      confirmLoading={false}
+      onCancel={toggoleModal}
+    >
+      <CategoryForm
+        handleSubmit={handleSubmit}
+        handleSetState={handleSetState}
+        category={category}
+        edit={true}
+      />
+    </Modal>
   </div>
 
 export default EditCategory;

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import _ from 'lodash';
-import { Row } from 'antd'
+import { Row, Button } from 'antd'
 
 import {
   fetchCategoryAPI,
@@ -20,7 +20,9 @@ class CategoryContainer extends Component {
     super(props);
     this.state={
       category:{},
-      editCategory: {},
+      visibleCreate: false,
+      visibleEdit: false,
+      confirmLoading: false,
     }
     this._setStateCategory = this._setStateCategory.bind(this);
     this._setStateEditCategory = this._setStateEditCategory.bind(this);
@@ -29,6 +31,8 @@ class CategoryContainer extends Component {
     this._handleDeleteCategory = this._handleDeleteCategory.bind(this);
     this._handleSearchCategory = this._handleSearchCategory.bind(this);
     this._selectCategory = this._selectCategory.bind(this);
+    this._toggleModalCreate = this._toggleModalCreate.bind(this);
+    this._toggleModalEdit = this._toggleModalEdit.bind(this);
   }
 
   componentDidMount() {
@@ -41,8 +45,8 @@ class CategoryContainer extends Component {
   }
 
   _handleEditCategory() {
-    this.props.handleEditCategoryAPI(this.state.editCategory)
-    this.setState({editCategory: {}})
+    this.props.handleEditCategoryAPI(this.state.category)
+    this.setState({category: {}})
   }
 
   _handleDeleteCategory(category) {
@@ -65,26 +69,34 @@ class CategoryContainer extends Component {
       this.setState({editCategory})
   }
 
-  _selectCategory(editCategory){
-    this.setState({editCategory})
+  _selectCategory(category){
+    this.setState({
+      category,
+      visibleEdit: !this.state.visibleEdit
+    })
   }
 
+  _toggleModalCreate() {
+    this.setState({visibleCreate: !this.state.visibleCreate})
+  }
+
+  _toggleModalEdit() {
+    this.setState({visibleEdit: !this.state.visibleEdit})
+  }
   render() {
-    const { category, editCategory } = this.state;
+    const { category, visibleCreate, visibleEdit } = this.state;
+
     return (
       <Row>
         <Row>
-          <CreateCategory
-            handleSubmit={this._handleAddCategory}
-            handleSetState={this._setStateCategory}
-            category={category}
-          />
-          <EditCategory
-            handleSubmit={this._handleEditCategory}
-            handleSetState={this._setStateEditCategory}
-            category={editCategory}
-          />
+          <Button
+            type='primary'
+            onClick={()=>this._toggleModalCreate()}
+          >
+            Add Category
+          </Button>
         </Row>
+
         <Row>
           <CategoryList
             data={this.props.category.categories}
@@ -92,6 +104,23 @@ class CategoryContainer extends Component {
             handleSelectCategory={this._selectCategory}
             handleDelete={this._handleDeleteCategory}
             handleSearch={this._handleSearchCategory}
+          />
+        </Row>
+
+        <Row>
+          <CreateCategory
+            handleSubmit={this._handleAddCategory}
+            handleSetState={this._setStateCategory}
+            visible={visibleCreate}
+            toggoleModal={this._toggleModalCreate}
+            category={category}
+          />
+          <EditCategory
+            handleSubmit={this._handleEditCategory}
+            visible={visibleEdit}
+            handleSetState={this._setStateEditCategory}
+            toggoleModal={this._toggleModalEdit}
+            category={category}
           />
         </Row>
       </Row>

@@ -22,17 +22,6 @@ const CategoryForm = ({handleSubmit, category, handleSetState, edit=false}) =>
           onChange={ text => handleSetState('note', text.target.value)}
         />
       </FormItem>
-
-      <FormItem>
-        <Button
-          type="primary"
-          htmlType="submit"
-          disabled={false}
-          onClick={handleSubmit}
-        >
-          { edit ? 'Edit' : 'Save'}
-        </Button>
-      </FormItem>
     </Form>
   </div>
 

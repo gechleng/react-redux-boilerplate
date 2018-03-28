@@ -34,7 +34,7 @@ const getCategoriesSuccess = (data) => {
 }
 
 export const fetchCategoryAPI = (text='') => {
-  const per_page = 10;
+  const per_page = 25;
   const url = baseUrl + 'category?' + 'per_page=' + per_page + '&search=' + text
   return (dispatch, getState) => {
     dispatch(getCategories())
