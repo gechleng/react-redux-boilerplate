@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Row, Button } from 'antd';
 import moment from 'moment';
 
 import {
@@ -18,6 +19,8 @@ class ProductContainer extends Component {
     super(props);
     this.state = {
       category: '',
+      visibleCreate: false,
+      visibleEdit: false,
       product: {},
     }
     this._setStateCategory = this._setStateCategory.bind(this);
@@ -27,6 +30,8 @@ class ProductContainer extends Component {
     this._handleSeleteProduct = this._handleSeleteProduct.bind(this);
     this._handleDeleteProduct = this._handleDeleteProduct.bind(this);
     this._handleSearchProduct = this._handleSearchProduct.bind(this);
+    this._toggleModalCreate = this._toggleModalCreate.bind(this);
+    this._toggleModalEdit = this._toggleModalEdit.bind(this);
   }
 
   componentWillMount() {
@@ -47,7 +52,12 @@ class ProductContainer extends Component {
     let product = this.state.product;
     product.category_id = this.state.category;
     product.expire_date = moment(product.expire_date).format('YYYY-MM-DD');
-    this.props.handeAddProductAPI(product)
+    this.props.handeAddProductAPI(product);
+    this.setState({
+      product: {},
+      category: '',
+      visibleCreate: false,
+    })
   }
 
   _handleEditProduct() {
@@ -56,7 +66,9 @@ class ProductContainer extends Component {
     this.props.handleUpdateProductAPI(product);
     this.setState({
       product: {},
-      category: ''
+      category: '',
+      visibleEdit: false,
+
     })
   }
 
@@ -71,42 +83,70 @@ class ProductContainer extends Component {
   _handleSeleteProduct(product) {
     this.setState({
       product,
-      category: product.category_id
+      category: product.category_id,
+      visibleEdit: !this.state.visibleEdit
     })
   }
 
+  _toggleModalCreate() {
+    this.setState({
+      visibleCreate: !this.state.visibleCreate,
+      product: {},
+      category: '',
+    })
+  }
+
+  _toggleModalEdit() {
+    this.setState({visibleEdit: !this.state.visibleEdit})
+  }
+
   render() {
-    const { category, product } = this.state;
-    console.log('product', this.props.product);
-    console.log('cate',this.props.category);
+    const { category, product, visibleCreate, visibleEdit } = this.state;
+
     return (
-      <div>
-        <CreateProduct
-          product={product}
-          category={category}
-          categories={this.props.category.categories}
-          handleSetStateCategory={this._setStateCategory}
-          handleSetStateProduct={this._setStateProduct}
-          handleCreateProduct={this._handleCreateProduct}
-        />
+      <Row>
+        <Row>
+          <Button
+            type='primary'
+            onClick={()=>this._toggleModalCreate()}
+          >
+            Add Category
+          </Button>
+        </Row>
 
-        <EditProduct
-          edit={true}
-          product={product}
-          category={category}
-          categories={this.props.category.categories}
-          handleSetStateCategory={this._setStateCategory}
-          handleSetStateProduct={this._setStateProduct}
-          handleEditProduct={this._handleEditProduct}
-        />
+        <Row>
+          <ProductList
+            data={this.props.product.products}
+            handleSeleteProduct={this._handleSeleteProduct}
+            handleDeleteProduct={this._handleDeleteProduct}
+            handleSearchProduct={this._handleSearchProduct}
+          />
+        </Row>
 
-        <ProductList
-          data={this.props.product.products}
-          handleSeleteProduct={this._handleSeleteProduct}
-          handleDeleteProduct={this._handleDeleteProduct}
-          handleSearchProduct={this._handleSearchProduct}
-        />
-      </div>
+        <Row>
+          <CreateProduct
+            product={product}
+            category={category}
+            categories={this.props.category.categories}
+            visible={visibleCreate}
+            handleSetStateCategory={this._setStateCategory}
+            handleSetStateProduct={this._setStateProduct}
+            handleSubmit={this._handleCreateProduct}
+            toggoleModal={this._toggleModalCreate}
+
+          />
+          <EditProduct
+            visible={visibleEdit}
+            product={product}
+            category={category}
+            categories={this.props.category.categories}
+            handleSetStateCategory={this._setStateCategory}
+            handleSetStateProduct={this._setStateProduct}
+            toggoleModal={this._toggleModalEdit}
+            handleSubmit={this._handleEditProduct}
+          />
+        </Row>
+      </Row>
     )
   }
 }

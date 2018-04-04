@@ -41,12 +41,18 @@ class CategoryContainer extends Component {
 
   _handleAddCategory() {
     this.props.handleAddCategoryAPI(this.state.category)
-    this.setState({category: {}})
+    this.setState({
+      category: {},
+      visibleCreate: false,
+    })
   }
 
   _handleEditCategory() {
     this.props.handleEditCategoryAPI(this.state.category)
-    this.setState({category: {}})
+    this.setState({
+      category: {},
+      visibleEdit: false,
+    })
   }
 
   _handleDeleteCategory(category) {
@@ -77,12 +83,16 @@ class CategoryContainer extends Component {
   }
 
   _toggleModalCreate() {
-    this.setState({visibleCreate: !this.state.visibleCreate})
+    this.setState({
+      visibleCreate: !this.state.visibleCreate,
+      product: {}
+    })
   }
 
   _toggleModalEdit() {
     this.setState({visibleEdit: !this.state.visibleEdit})
   }
+
   render() {
     const { category, visibleCreate, visibleEdit } = this.state;
 

@@ -43,7 +43,7 @@ export default class ProductList extends Component {
     }];
 
     return (
-      <div>
+      <div style={{marginTop: 10}}>
         <Search
           style={{marginBottom: 10}}
           placeholder="search category ID"

@@ -1,19 +1,33 @@
 import React from 'react';
+import { Modal } from 'antd';
 
 import ProductForm from './ProductForm'
 
-const CreateProduct = ({product, category, categories, edit=false, handleSetStateCategory, handleSetStateProduct, handleCreateProduct}) =>
-  <div style={{backgroundColor: '#d9f2e6', padding: 10, marginBottom: 10}}>
-    <h1>Create Pruduction</h1>
-    <ProductForm
-      handleSetStateCategory={handleSetStateCategory}
-      handleSetStateProduct={handleSetStateProduct}
-      handleSubmitProduct={handleCreateProduct}
-      categories={categories}
-      category={category}
-      product={product}
-      edit={edit}
-    />
+const CreateProduct = ({
+  product,
+  category,
+  categories,
+  visible,
+  handleSetStateCategory,
+  handleSetStateProduct,
+  handleSubmit,
+  toggoleModal
+}) =>
+  <div>
+    <Modal title="Create Category"
+      visible={visible}
+      onOk={handleSubmit}
+      confirmLoading={false}
+      onCancel={toggoleModal}
+    >
+      <ProductForm
+        handleSetStateCategory={handleSetStateCategory}
+        handleSetStateProduct={handleSetStateProduct}
+        categories={categories}
+        category={category}
+        product={product}
+      />
+    </Modal>
   </div>
 
 export default CreateProduct;

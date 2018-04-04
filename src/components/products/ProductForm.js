@@ -6,9 +6,14 @@ const Option = Select.Option;
 
 class ProductForm extends Component {
   render() {
-    const { product, categories, category, handleSetStateProduct, edit, handleSubmitProduct, handleSetStateCategory } = this.props;
-    console.log(category)
-    console.log(categories)
+    const {
+      product,
+      categories,
+      category,
+      handleSetStateProduct,
+      edit,
+      handleSetStateCategory
+    } = this.props;
     return (
       <div>
         <Form layout="inline">
@@ -51,16 +56,6 @@ class ProductForm extends Component {
               onChange={(date) => handleSetStateProduct('expire_date', date._d)}
               value={moment(product.date)}
             />
-          </FormItem>
-
-          <FormItem>
-            <Button
-              type="primary"
-              htmlType="submit"
-              onClick={handleSubmitProduct}
-            >
-              { edit ? 'Edit' : 'Save'}
-            </Button>
           </FormItem>
         </Form>
       </div>
