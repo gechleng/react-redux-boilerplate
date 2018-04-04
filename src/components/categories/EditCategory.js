@@ -9,7 +9,8 @@ const EditCategory = ({
   handleSetState,
   visible,
   toggoleModal,
-  loading
+  loading,
+  isValid
 }) =>
   <div>
     <Modal title="Edit Category"
@@ -20,6 +21,7 @@ const EditCategory = ({
       confirmLoading={loading}
     >
       <CategoryForm
+        isValid={isValid}
         handleSetState={handleSetState}
         category={category}
       />

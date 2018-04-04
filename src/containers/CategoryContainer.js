@@ -22,6 +22,7 @@ class CategoryContainer extends Component {
       category:{},
       visibleCreate: false,
       visibleEdit: false,
+      isValid: false,
       confirmLoading: false,
     }
     this._setStateCategory = this._setStateCategory.bind(this);
@@ -40,19 +41,38 @@ class CategoryContainer extends Component {
   }
 
   _handleAddCategory() {
-    this.props.handleAddCategoryAPI(this.state.category)
-    this.setState({
-      category: {},
-      visibleCreate: false,
-    })
+    const {category} = this.props;
+    if(this._isCategoryValid()) {
+      this.props.handleAddCategoryAPI(this.state.category)
+      this.setState({
+        category: {},
+        visibleCreate: false,
+        isValid: false
+      })
+    }else{
+      this.setState({isValid: true})
+    }
   }
 
   _handleEditCategory() {
-    this.props.handleEditCategoryAPI(this.state.category)
-    this.setState({
-      category: {},
-      visibleEdit: false,
-    })
+    const { category } = this.state;
+
+    if(this._isCategoryValid()) {
+      this.props.handleEditCategoryAPI(category)
+      this.setState({
+        category: {},
+        visibleEdit: false,
+        isValid: false
+      })
+    }else{
+      this.setState({isValid: true})
+    }
+  }
+
+  _isCategoryValid() {
+    const { category } = this.state;
+
+    return category && category.name && category.note
   }
 
   _handleDeleteCategory(category) {
@@ -70,9 +90,9 @@ class CategoryContainer extends Component {
   }
 
   _setStateEditCategory(key, val) {
-      let editCategory = this.state.editCategory;
-      editCategory[key] = val;
-      this.setState({editCategory})
+      let category = this.state.category;
+      category[key] = val;
+      this.setState({category})
   }
 
   _selectCategory(category){
@@ -85,16 +105,21 @@ class CategoryContainer extends Component {
   _toggleModalCreate() {
     this.setState({
       visibleCreate: !this.state.visibleCreate,
-      product: {}
+      category: {},
+      isValid: false
     })
   }
 
   _toggleModalEdit() {
-    this.setState({visibleEdit: !this.state.visibleEdit})
+    this.setState({
+      visibleEdit: !this.state.visibleEdit,
+      category: {},
+      isValid: false
+    })
   }
 
   render() {
-    const { category, visibleCreate, visibleEdit } = this.state;
+    const { category, visibleCreate, visibleEdit,isValid } = this.state;
     const { loading } = this.props.category;
 
 
@@ -131,6 +156,7 @@ class CategoryContainer extends Component {
           />
 
           <EditCategory
+            isValid={isValid}
             loading={loading}
             handleSubmit={this._handleEditCategory}
             visible={visibleEdit}

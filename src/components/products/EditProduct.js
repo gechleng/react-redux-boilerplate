@@ -12,7 +12,8 @@ const EditProduct = ({
   handleSetStateCategory,
   handleSetStateProduct,
   toggoleModal,
-  loading
+  loading,
+  isValid
 }) =>
   <div>
     <Modal title="Create Product"
@@ -28,6 +29,7 @@ const EditProduct = ({
         categories={categories}
         category={category}
         product={product}
+        isValid={isValid}
       />
     </Modal>
   </div>

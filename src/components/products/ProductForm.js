@@ -11,9 +11,11 @@ class ProductForm extends Component {
       categories,
       category,
       handleSetStateProduct,
-      handleSetStateCategory
+      handleSetStateCategory,
+      isValid
     } = this.props;
 
+    console.log(isValid)
     return (
       <div>
         <Form layout="inline">
@@ -58,6 +60,7 @@ class ProductForm extends Component {
             />
           </FormItem>
         </Form>
+        { isValid && <p style={{color: 'red'}}>You miss something!!!</p>}
       </div>
     )
   }

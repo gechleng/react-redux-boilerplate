@@ -24,6 +24,7 @@ class ProductContainer extends Component {
       visibleCreate: false,
       visibleEdit: false,
       product: {},
+      isValid: false,
     }
     this._setStateCategory = this._setStateCategory.bind(this);
     this._setStateProduct = this._setStateProduct.bind(this);
@@ -55,23 +56,42 @@ class ProductContainer extends Component {
     let product = this.state.product;
     product.category_id = this.state.category;
     product.expire_date = moment(product.expire_date).format('YYYY-MM-DD') || moment().format('YYYY-MM-DD');
-    this.props.handeAddProductAPI(product);
-    this.setState({
-      product: {},
-      category: '',
-      visibleCreate: false,
-    })
+    if(this._isproductValid()){
+      this.props.handeAddProductAPI(product);
+      this.setState({
+        product: {},
+        category: '',
+        visibleCreate: false,
+        isValid: false
+      })
+    }else{
+      this.setState({
+        isValid: true
+      })
+    }
   }
 
   _handleEditProduct() {
     let product = this.state.product;
     product.category_id = this.state.category;
-    this.props.handleUpdateProductAPI(product);
-    this.setState({
-      product: {},
-      category: '',
-      visibleEdit: false,
-    })
+    if(this._isproductValid()){
+      this.props.handleUpdateProductAPI(product);
+      this.setState({
+        product: {},
+        category: '',
+        visibleEdit: false,
+        isValid: false
+      })
+    }else{
+      this.setState({
+        isValid: true
+      })
+    }
+  }
+
+  _isproductValid() {
+    const { product, category } = this.state;
+    return category && product && product.name && product.price && product.note
   }
 
   _handleDeleteProduct(product) {
@@ -103,7 +123,7 @@ class ProductContainer extends Component {
   }
 
   render() {
-    const { category, product, visibleCreate, visibleEdit } = this.state;
+    const { category, product, visibleCreate, visibleEdit, isValid } = this.state;
     const { loading } = this.props.product;
 
     return (
@@ -129,6 +149,7 @@ class ProductContainer extends Component {
 
         <Row>
           <CreateProduct
+            isValid={isValid}
             loading={loading}
             product={product}
             category={category}
@@ -141,6 +162,7 @@ class ProductContainer extends Component {
           />
 
           <EditProduct
+            isValid={isValid}
             loading={loading}
             visible={visibleEdit}
             product={product}

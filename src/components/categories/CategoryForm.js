@@ -2,7 +2,7 @@ import React from 'react';
 import { Form, Icon, Input } from 'antd';
 const FormItem = Form.Item;
 
-const CategoryForm = ({category, handleSetState}) =>
+const CategoryForm = ({category, handleSetState, isValid}) =>
   <div>
     <Form layout="inline">
       <FormItem>
@@ -23,6 +23,7 @@ const CategoryForm = ({category, handleSetState}) =>
         />
       </FormItem>
     </Form>
+    { isValid && <p style={{color: 'red'}}>You miss somethng!!!</p>}
   </div>
 
 

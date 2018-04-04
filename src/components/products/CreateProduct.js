@@ -12,7 +12,8 @@ const CreateProduct = ({
   handleSetStateProduct,
   handleSubmit,
   toggoleModal,
-  loading
+  loading,
+  isValid
 }) =>
   <div>
     <Modal title="Create Product"
@@ -28,6 +29,7 @@ const CreateProduct = ({
         categories={categories}
         category={category}
         product={product}
+        isValid={isValid}
       />
     </Modal>
   </div>
