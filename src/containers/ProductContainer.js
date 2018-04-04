@@ -52,22 +52,29 @@ class ProductContainer extends Component {
     this.setState({product})
   }
 
+  _resetState() {
+    this.setState({
+      product: {},
+      category: '',
+      visibleCreate: false,
+      visibleEdit: false,
+      isValid: false
+    })
+  }
+
+  _setInvalidState() {
+    this.setState({ isValid: true })
+  }
+
   _handleCreateProduct() {
     let product = this.state.product;
     product.category_id = this.state.category;
     product.expire_date = moment(product.expire_date).format('YYYY-MM-DD') || moment().format('YYYY-MM-DD');
     if(this._isproductValid()){
-      this.props.handeAddProductAPI(product);
-      this.setState({
-        product: {},
-        category: '',
-        visibleCreate: false,
-        isValid: false
-      })
+      this.props.handeAddProductAPI(product)
+      this._resetState()
     }else{
-      this.setState({
-        isValid: true
-      })
+      this._setInvalidState()
     }
   }
 
@@ -75,17 +82,10 @@ class ProductContainer extends Component {
     let product = this.state.product;
     product.category_id = this.state.category;
     if(this._isproductValid()){
-      this.props.handleUpdateProductAPI(product);
-      this.setState({
-        product: {},
-        category: '',
-        visibleEdit: false,
-        isValid: false
-      })
+      this.props.handleUpdateProductAPI(product)
+      this._resetState()
     }else{
-      this.setState({
-        isValid: true
-      })
+      this._setInvalidState()
     }
   }
 
@@ -127,7 +127,7 @@ class ProductContainer extends Component {
     const { loading } = this.props.product;
 
     return (
-      <Row>
+      <Row style={{padding:20}}>
         <Row style={{marginTop: 10}}>
           <Button
             type='primary'

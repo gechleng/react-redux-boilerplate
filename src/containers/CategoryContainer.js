@@ -39,17 +39,26 @@ class CategoryContainer extends Component {
     this.props.handlGetCategoryAPI()
   }
 
+  _resetState() {
+    this.setState({
+      category: {},
+      visibleCreate: false,
+      visibleEdit: false,
+      isValid: false
+    })
+  }
+
+  _setInvalidState() {
+    this.setState({isValid: true})
+  }
+
   _handleAddCategory() {
     const {category} = this.state;
     if(this._isCategoryValid()) {
       this.props.handleAddCategoryAPI(category)
-      this.setState({
-        category: {},
-        visibleCreate: false,
-        isValid: false
-      })
+      this._resetState()
     }else{
-      this.setState({isValid: true})
+      this._setInvalidState()
     }
   }
 
@@ -58,19 +67,14 @@ class CategoryContainer extends Component {
 
     if(this._isCategoryValid()) {
       this.props.handleEditCategoryAPI(category)
-      this.setState({
-        category: {},
-        visibleEdit: false,
-        isValid: false
-      })
+      this._resetState()
     }else{
-      this.setState({isValid: true})
+      this._setInvalidState()
     }
   }
 
   _isCategoryValid() {
     const { category } = this.state;
-
     return category && category.name && category.note
   }
 
@@ -115,9 +119,8 @@ class CategoryContainer extends Component {
     const { category, visibleCreate, visibleEdit,isValid } = this.state;
     const { loading } = this.props.category;
 
-
     return (
-      <Row>
+      <Row style={{flex: 1, padding: 20}}>
         <Row style={{marginTop: 10}}>
           <Button
             type='primary'

@@ -15,11 +15,14 @@ class ProductForm extends Component {
       isValid
     } = this.props;
 
-    console.log(isValid)
+    const categoryName = product.category_id &&
+                          categories.find(cate => cate.id == product.category_id && cate) ?
+                            categories.find(cate => cate.id == product.category_id && cate).name
+                             : ''
     return (
       <div>
         <Form layout="inline">
-          <Select firstActiveValue={category} style={{ width: 120 }} onChange={ text => handleSetStateCategory(text) }>
+          <Select value={category || categoryName} style={{ width: 120 }} onChange={ text => handleSetStateCategory(text) }>
             {
               categories.map(
                 category => <Option value={category.id}>{category.name}</Option>
@@ -55,8 +58,8 @@ class ProductForm extends Component {
 
           <FormItem>
             <DatePicker
-              onChange={(date) => handleSetStateProduct('expire_date', date._d)}
-              value={moment(product.date)}
+              onChange={(date) => handleSetStateProduct('expire_date', moment(date._d).format('YYYY-MM-DD') )}
+              value={moment(product.expire_date)}
             />
           </FormItem>
         </Form>
