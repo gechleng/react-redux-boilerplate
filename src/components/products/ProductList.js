@@ -42,7 +42,7 @@ export default class ProductList extends Component {
             <Icon type="delete" />
           </Button>
           <Divider type="vertical" />
-          <Button onClick={ () => handleSeleteProduct(record) }>
+          <Button onClick={() => handleSeleteProduct(record) }>
             <Icon type="edit" />
           </Button>
         </span>

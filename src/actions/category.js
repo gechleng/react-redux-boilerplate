@@ -26,7 +26,7 @@ import {
 
 const getCategories = () => ({ type: GET_CATEGORIES })
 const getCategoriesFailure = () => ({ type: GET_CATEGORIES_FAILURE })
-const getCategoriesSuccess = (data) => {
+const getCategoriesSuccess = data => {
 	return {
 		type: GET_CATEGORIES_SUCCESS,
 		data: data
@@ -37,7 +37,7 @@ export const fetchCategoryAPI = (text='') => {
   const per_page = 25;
   const url = baseUrl + 'category?' + 'per_page=' + per_page + '&search=' + text;
 
-  return (dispatch, getState) => {
+  return dispatch => {
     dispatch(getCategories())
     axios.get(url)
       .then(res => {
@@ -49,17 +49,17 @@ export const fetchCategoryAPI = (text='') => {
 
 const addCategory = () => ({ type: ADD_CATEGORY })
 const addCategoryFailure = () => ({ type: ADD_CATEGORY_FAILURE })
-const addCategorySuccess = (data) => {
+const addCategorySuccess = data => {
 	return {
 		type: ADD_CATEGORY_SUCCESS,
 		data: data
 	}
 }
 
-export const addCategoryAPI = (data) => {
+export const addCategoryAPI = data => {
   const url = baseUrl + 'category/';
 
-  return (dispatch) => {
+  return dispatch => {
     dispatch(addCategory())
     axios.post(url, data)
       .then(res => {
@@ -72,17 +72,17 @@ export const addCategoryAPI = (data) => {
 
 const editCategory = () => ({ type: EDIT_CATEGORY })
 const editCategoryFailure = () => ({ type: EDIT_CATEGORY_FAILURE })
-const editCategorySuccess = (data) => {
+const editCategorySuccess = data => {
 	return {
 		type: EDIT_CATEGORY_SUCCESS,
 		data: data
 	}
 }
 
-export const editCategoryAPI = (data) => {
+export const editCategoryAPI = data => {
   const url = baseUrl + 'category/' + data.id;
 
-  return (dispatch) => {
+  return dispatch => {
     dispatch(editCategory())
     axios.put(url, data)
       .then(res => {
@@ -95,17 +95,17 @@ export const editCategoryAPI = (data) => {
 
 const deleteCategory = () => ({ type: DELETE_CATEGORY })
 const deleteCategoryFailure = () => ({ type: DELETE_CATEGORY_FAILURE })
-const deleteCategorySuccess = (data) => {
+const deleteCategorySuccess = data => {
 	return {
 		type: DELETE_CATEGORY_SUCCESS,
 		data: data
 	}
 }
 
-export const deleteCategoryAPI = (data) => {
+export const deleteCategoryAPI = data => {
   const url = baseUrl + 'category/' + data.id;
 
-  return (dispatch) => {
+  return dispatch => {
     dispatch(deleteCategory())
     axios.delete(url, data)
       .then(res => {
@@ -118,17 +118,17 @@ export const deleteCategoryAPI = (data) => {
 
 const getCategory = () => ({ type: GET_CATEGORY })
 const getCategoryFailure = () => ({ type: GET_CATEGORY_FAILURE })
-const getCategorySuccess = (data) => {
+const getCategorySuccess = data => {
 	return {
 		type: GET_CATEGORY_SUCCESS,
 		data: data
 	}
 }
 
-export const getCategoryAPI = (data) => {
+export const getCategoryAPI = data => {
   const url = baseUrl + 'category/' + data;
 
-  return (dispatch) => {
+  return dispatch => {
     dispatch(getCategory())
     axios.get(url, data)
       .then(res => {

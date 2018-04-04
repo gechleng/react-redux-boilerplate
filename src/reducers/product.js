@@ -56,11 +56,11 @@ export default function product(state=initialState, action){
 			return { ...state, loading: true }
 		}
     case UPDATE_PRODUCT_SUCCESS: {
-			let products = _.map(state.products, (product) => product.id == action.data.id ? action.data : product)
+			let products = _.map(state.products, product => product.id == action.data.id ? action.data : product)
 
 			return {
         ...state,
-        products: products,
+        products,
         loading: false
       }
 		}
@@ -72,11 +72,11 @@ export default function product(state=initialState, action){
 			return { ...state, loading: true }
 		}
     case DELETE_PRODUCT_SUCCESS: {
-			let products = _.remove(state.products, (product) => product.id != action.data.id)
+			let products = _.remove(state.products, product => product.id != action.data.id)
 
 			return {
         ...state,
-        products: products,
+        products,
         loading: false
       }
 		}

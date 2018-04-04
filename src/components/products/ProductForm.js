@@ -16,8 +16,8 @@ class ProductForm extends Component {
     } = this.props;
 
     const categoryName = product.category_id &&
-                          categories.find(cate => cate.id == product.category_id && cate) ?
-                            categories.find(cate => cate.id == product.category_id && cate).name
+                          categories.find(cate => cate.id === product.category_id && cate) ?
+                            categories.find(cate => cate.id === product.category_id && cate).name
                              : ''
     return (
       <div>
@@ -58,7 +58,7 @@ class ProductForm extends Component {
 
           <FormItem>
             <DatePicker
-              onChange={(date) => handleSetStateProduct('expire_date', moment(date._d).format('YYYY-MM-DD') )}
+              onChange={date => handleSetStateProduct('expire_date', moment(date._d).format('YYYY-MM-DD') )}
               value={moment(product.expire_date)}
             />
           </FormItem>

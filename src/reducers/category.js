@@ -62,10 +62,10 @@ export default function category(state=initialState, action){
 			return { ...state, loading: true }
 		}
     case EDIT_CATEGORY_SUCCESS: {
-      let categories = _.map(state.categories, (category) => category.id == action.data.id ? action.data : category)
+      let categories = _.map(state.categories, category => category.id == action.data.id ? action.data : category)
       return {
         ...state,
-        categories: categories,
+        categories,
         loading: false
       }
 		}
@@ -77,10 +77,10 @@ export default function category(state=initialState, action){
 			return { ...state, loading: true }
 		}
     case DELETE_CATEGORY_SUCCESS: {
-      let categories = _.remove(state.categories, (category) => category.id != action.data.id)
+      let categories = _.remove(state.categories, category => category.id != action.data.id)
       return {
         ...state,
-        categories: categories,
+        categories,
         loading: false
       }
 		}

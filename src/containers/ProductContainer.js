@@ -131,7 +131,7 @@ class ProductContainer extends Component {
         <Row style={{marginTop: 10}}>
           <Button
             type='primary'
-            onClick={()=>this._toggleModalCreate()}
+            onClick={this._toggleModalCreate}
           >
             Add Product
           </Button>

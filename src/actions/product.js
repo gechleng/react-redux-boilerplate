@@ -21,20 +21,19 @@ import {
 
 const addProduct = () => ({ type: ADD_PRODUCT })
 const addProductFailure = () => ({ type: ADD_PRODUCT_FAILURE })
-const addProductSuccess = (data) => {
+const addProductSuccess = data => {
 	return {
 		type: ADD_PRODUCT_SUCCESS,
 		data: data
 	}
 }
 
-export const addProductAPI = (data) => {
+export const addProductAPI = data => {
 	const url = baseUrl + 'product/';
-	return (dispatch, getState) => {
+	return dispatch => {
     dispatch(addProduct())
     axios.post(url, data)
       .then(res => {
-				console.log('res: ', res.data)
         dispatch(addProductSuccess(res.data))
       })
       .catch(err => dispatch(addProductFailure()))
@@ -43,7 +42,7 @@ export const addProductAPI = (data) => {
 
 const getProducts = () => ({ type: GET_PRODUCTS })
 const getProductsFailure = () => ({ type: GET_PRODUCTS_FAILURE })
-const getProductsSuccess = (data) => {
+const getProductsSuccess = data => {
 	return {
 		type: GET_PRODUCTS_SUCCESS,
 		data: data
@@ -52,7 +51,7 @@ const getProductsSuccess = (data) => {
 
 export const getProductsAPI = (text='') => {
   const url = baseUrl + 'product?&search=' + text;
-	return (dispatch) => {
+	return dispatch => {
     dispatch(getProducts())
 		axios.get(url)
       .then(res => dispatch(getProductsSuccess(res.data)))
@@ -62,16 +61,16 @@ export const getProductsAPI = (text='') => {
 
 const updateProduct = () => ({ type: UPDATE_PRODUCT })
 const updateProductFailure = () => ({ type: UPDATE_PRODUCT_FAILURE })
-const updateProductSuccess = (data) => {
+const updateProductSuccess = data => {
 	return {
 		type: UPDATE_PRODUCT_SUCCESS,
 		data: data
 	}
 }
 
-export const updateProductsAPI = (data) => {
+export const updateProductsAPI = data => {
   const url = baseUrl + 'product/' + data.id;
-	return (dispatch) => {
+	return dispatch => {
     dispatch(updateProduct())
 		axios.put(url, data)
       .then(res => dispatch(updateProductSuccess(res.data)))
@@ -81,16 +80,16 @@ export const updateProductsAPI = (data) => {
 
 const deleteProduct = () => ({ type: DELETE_PRODUCT })
 const deleteProductFailure = () => ({ type: DELETE_PRODUCT_FAILURE })
-const deleteProductSuccess = (data) => {
+const deleteProductSuccess = data => {
 	return {
 		type: DELETE_PRODUCT_SUCCESS,
 		data: data
 	}
 }
 
-export const deleteProductsAPI = (data) => {
+export const deleteProductsAPI = data => {
   const url = baseUrl + 'product/' + data.id;
-	return (dispatch) => {
+	return dispatch => {
     dispatch(deleteProduct())
 		axios.delete(url)
       .then(res => dispatch(deleteProductSuccess(res.data)))
