@@ -3,7 +3,13 @@ import { Modal } from 'antd';
 
 import CategoryForm from './CategoryForm';
 
-const EditCategory = ({category, handleSubmit, handleSetState, visible, toggoleModal}) =>
+const EditCategory = ({
+  category,
+  handleSubmit,
+  handleSetState,
+  visible,
+  toggoleModal
+}) =>
   <div>
     <Modal title="Edit Category"
       visible={visible}
@@ -12,10 +18,8 @@ const EditCategory = ({category, handleSubmit, handleSetState, visible, toggoleM
       onCancel={toggoleModal}
     >
       <CategoryForm
-        handleSubmit={handleSubmit}
         handleSetState={handleSetState}
         category={category}
-        edit={true}
       />
     </Modal>
   </div>

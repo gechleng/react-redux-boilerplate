@@ -35,7 +35,8 @@ const getCategoriesSuccess = (data) => {
 
 export const fetchCategoryAPI = (text='') => {
   const per_page = 25;
-  const url = baseUrl + 'category?' + 'per_page=' + per_page + '&search=' + text
+  const url = baseUrl + 'category?' + 'per_page=' + per_page + '&search=' + text;
+
   return (dispatch, getState) => {
     dispatch(getCategories())
     axios.get(url)
@@ -56,7 +57,8 @@ const addCategorySuccess = (data) => {
 }
 
 export const addCategoryAPI = (data) => {
-  const url = baseUrl + 'category/'
+  const url = baseUrl + 'category/';
+
   return (dispatch) => {
     dispatch(addCategory())
     axios.post(url, data)
@@ -78,7 +80,8 @@ const editCategorySuccess = (data) => {
 }
 
 export const editCategoryAPI = (data) => {
-  const url = baseUrl + 'category/' + data.id
+  const url = baseUrl + 'category/' + data.id;
+
   return (dispatch) => {
     dispatch(editCategory())
     axios.put(url, data)
@@ -100,7 +103,8 @@ const deleteCategorySuccess = (data) => {
 }
 
 export const deleteCategoryAPI = (data) => {
-  const url = baseUrl + 'category/' + data.id
+  const url = baseUrl + 'category/' + data.id;
+
   return (dispatch) => {
     dispatch(deleteCategory())
     axios.delete(url, data)
@@ -122,7 +126,8 @@ const getCategorySuccess = (data) => {
 }
 
 export const getCategoryAPI = (data) => {
-  const url = baseUrl + 'category/' + data
+  const url = baseUrl + 'category/' + data;
+
   return (dispatch) => {
     dispatch(getCategory())
     axios.get(url, data)

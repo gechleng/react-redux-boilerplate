@@ -4,7 +4,13 @@ const Search = Input.Search;
 
 export default class ProductList extends Component {
   render() {
-    const { data, handleSeleteProduct, handleDeleteProduct, handleSearchProduct } = this.props;
+    const {
+      data,
+      handleSeleteProduct,
+      handleDeleteProduct,
+      handleSearchProduct
+    } = this.props;
+
     const columns = [{
       title: 'Id',
       dataIndex: 'id',

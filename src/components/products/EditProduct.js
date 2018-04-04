@@ -11,7 +11,6 @@ const EditProduct = ({
   handleSubmit,
   handleSetStateCategory,
   handleSetStateProduct,
-  handleEditProduct,
   toggoleModal
 }) =>
   <div>

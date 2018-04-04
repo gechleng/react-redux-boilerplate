@@ -5,6 +5,7 @@ const Search = Input.Search;
 class CategoryList extends Component {
   render() {
     const { data, handleSelectCategory, handleDelete, handleSearch} = this.props;
+
     const columns = [{
       title: 'Id',
       dataIndex: 'id',
@@ -42,6 +43,7 @@ class CategoryList extends Component {
           onSearch={value => handleSearch(value)}
           enterButton
         />
+
         <Table
           columns={columns}
           dataSource={data}

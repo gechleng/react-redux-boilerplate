@@ -4,10 +4,9 @@ import thunk from 'redux-thunk'
 
 export default function configureStore() {
   let store = createStore(
-	rootReducer,
-	applyMiddleware(thunk),
-	window.devTollsExtension && window.devTollsExtension()
+  	rootReducer,
+  	applyMiddleware(thunk),
   );
-  
+
   return store
 }

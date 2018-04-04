@@ -125,6 +125,7 @@ class CategoryContainer extends Component {
             toggoleModal={this._toggleModalCreate}
             category={category}
           />
+          
           <EditCategory
             handleSubmit={this._handleEditCategory}
             visible={visibleEdit}

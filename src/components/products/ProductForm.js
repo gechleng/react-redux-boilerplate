@@ -11,9 +11,9 @@ class ProductForm extends Component {
       categories,
       category,
       handleSetStateProduct,
-      edit,
       handleSetStateCategory
     } = this.props;
+
     return (
       <div>
         <Form layout="inline">

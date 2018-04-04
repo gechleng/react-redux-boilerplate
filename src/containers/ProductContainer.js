@@ -10,10 +10,7 @@ import {
   deleteProductsAPI
  } from '../actions/product';
 
-
- import {
-   fetchCategoryAPI,
- } from '../actions/category';
+ import { fetchCategoryAPI } from '../actions/category';
 
 import CreateProduct from '../components/products/CreateProduct';
 import EditProduct from '../components/products/EditProduct';
@@ -74,7 +71,6 @@ class ProductContainer extends Component {
       product: {},
       category: '',
       visibleEdit: false,
-
     })
   }
 
@@ -139,8 +135,8 @@ class ProductContainer extends Component {
             handleSetStateProduct={this._setStateProduct}
             handleSubmit={this._handleCreateProduct}
             toggoleModal={this._toggleModalCreate}
-
           />
+          
           <EditProduct
             visible={visibleEdit}
             product={product}

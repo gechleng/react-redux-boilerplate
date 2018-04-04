@@ -1,8 +1,8 @@
 import React from 'react';
-import { Form, Icon, Input, Button } from 'antd';
+import { Form, Icon, Input } from 'antd';
 const FormItem = Form.Item;
 
-const CategoryForm = ({handleSubmit, category, handleSetState, edit=false}) =>
+const CategoryForm = ({category, handleSetState}) =>
   <div>
     <Form layout="inline">
       <FormItem>
