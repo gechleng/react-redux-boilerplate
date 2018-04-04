@@ -26,7 +26,6 @@ class CategoryContainer extends Component {
       confirmLoading: false,
     }
     this._setStateCategory = this._setStateCategory.bind(this);
-    this._setStateEditCategory = this._setStateEditCategory.bind(this);
     this._handleAddCategory = this._handleAddCategory.bind(this);
     this._handleEditCategory = this._handleEditCategory.bind(this);
     this._handleDeleteCategory = this._handleDeleteCategory.bind(this);
@@ -41,9 +40,9 @@ class CategoryContainer extends Component {
   }
 
   _handleAddCategory() {
-    const {category} = this.props;
+    const {category} = this.state;
     if(this._isCategoryValid()) {
-      this.props.handleAddCategoryAPI(this.state.category)
+      this.props.handleAddCategoryAPI(category)
       this.setState({
         category: {},
         visibleCreate: false,
@@ -84,12 +83,6 @@ class CategoryContainer extends Component {
   }
 
   _setStateCategory(key, val) {
-      let category = this.state.category;
-      category[key] = val;
-      this.setState({category})
-  }
-
-  _setStateEditCategory(key, val) {
       let category = this.state.category;
       category[key] = val;
       this.setState({category})
@@ -160,7 +153,7 @@ class CategoryContainer extends Component {
             loading={loading}
             handleSubmit={this._handleEditCategory}
             visible={visibleEdit}
-            handleSetState={this._setStateEditCategory}
+            handleSetState={this._setStateCategory}
             toggoleModal={this._toggleModalEdit}
             category={category}
           />
