@@ -8,7 +8,8 @@ const EditCategory = ({
   handleSubmit,
   handleSetState,
   visible,
-  toggoleModal
+  toggoleModal,
+  loading
 }) =>
   <div>
     <Modal title="Edit Category"
@@ -16,6 +17,7 @@ const EditCategory = ({
       onOk={handleSubmit}
       confirmLoading={false}
       onCancel={toggoleModal}
+      confirmLoading={loading}
     >
       <CategoryForm
         handleSetState={handleSetState}

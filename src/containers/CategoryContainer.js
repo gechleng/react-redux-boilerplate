@@ -95,6 +95,8 @@ class CategoryContainer extends Component {
 
   render() {
     const { category, visibleCreate, visibleEdit } = this.state;
+    const { loading } = this.props.category;
+
 
     return (
       <Row>
@@ -109,6 +111,7 @@ class CategoryContainer extends Component {
 
         <Row>
           <CategoryList
+            loading={loading}
             data={this.props.category.categories}
             paging={this.props.category.paging}
             handleSelectCategory={this._selectCategory}
@@ -119,14 +122,16 @@ class CategoryContainer extends Component {
 
         <Row>
           <CreateCategory
+            loading={loading}
             handleSubmit={this._handleAddCategory}
             handleSetState={this._setStateCategory}
             visible={visibleCreate}
             toggoleModal={this._toggleModalCreate}
             category={category}
           />
-          
+
           <EditCategory
+            loading={loading}
             handleSubmit={this._handleEditCategory}
             visible={visibleEdit}
             handleSetState={this._setStateEditCategory}

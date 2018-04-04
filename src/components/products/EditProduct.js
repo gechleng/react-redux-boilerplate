@@ -11,7 +11,8 @@ const EditProduct = ({
   handleSubmit,
   handleSetStateCategory,
   handleSetStateProduct,
-  toggoleModal
+  toggoleModal,
+  loading
 }) =>
   <div>
     <Modal title="Create Product"
@@ -19,6 +20,7 @@ const EditProduct = ({
       onOk={handleSubmit}
       confirmLoading={false}
       onCancel={toggoleModal}
+      confirmLoading={loading}
     >
       <ProductForm
         handleSetStateCategory={handleSetStateCategory}

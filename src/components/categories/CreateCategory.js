@@ -7,13 +7,15 @@ const CreateCategory = ({
   handleSubmit,
   handleSetState,
   visible,
-  toggoleModal
+  toggoleModal,
+  loading
 }) =>
   <div>
     <Modal title="Create Category"
       visible={visible}
       onOk={handleSubmit}
       confirmLoading={false}
+      confirmLoading={loading}
       onCancel={toggoleModal}
     >
       <CategoryForm

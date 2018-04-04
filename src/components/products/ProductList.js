@@ -8,7 +8,8 @@ export default class ProductList extends Component {
       data,
       handleSeleteProduct,
       handleDeleteProduct,
-      handleSearchProduct
+      handleSearchProduct,
+      loading
     } = this.props;
 
     const columns = [{
@@ -56,11 +57,14 @@ export default class ProductList extends Component {
           onSearch={value => handleSearchProduct(value)}
           enterButton
         />
-        <Table
-          columns={columns}
-          dataSource={data}
-          onChange={(pagination, filters, sorter) => console.log('pagination',pagination, 'filters',filters, 'sorter', sorter)}
-        />
+        {
+          loading ? <div>Loading....</div>
+          : <Table
+              columns={columns}
+              dataSource={data}
+              onChange={(pagination, filters, sorter) => console.log('pagination',pagination, 'filters',filters, 'sorter', sorter)}
+            />
+        }
       </div>
     )
   }

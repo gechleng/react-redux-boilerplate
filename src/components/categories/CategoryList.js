@@ -4,7 +4,7 @@ const Search = Input.Search;
 
 class CategoryList extends Component {
   render() {
-    const { data, handleSelectCategory, handleDelete, handleSearch} = this.props;
+    const { data, handleSelectCategory, handleDelete, handleSearch, loading} = this.props;
 
     const columns = [{
       title: 'Id',
@@ -43,12 +43,14 @@ class CategoryList extends Component {
           onSearch={value => handleSearch(value)}
           enterButton
         />
-
-        <Table
-          columns={columns}
-          dataSource={data}
-          onChange={(pagination, filters, sorter) => console.log('pagination',pagination, 'filters',filters, 'sorter', sorter)}
-        />
+        {
+          loading ? <div>loading...</div>
+          : <Table
+              columns={columns}
+              dataSource={data}
+              onChange={(pagination, filters, sorter) => console.log('pagination',pagination, 'filters',filters, 'sorter', sorter)}
+            />
+        }
       </div>
     )
   }

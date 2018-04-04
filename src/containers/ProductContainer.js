@@ -54,7 +54,7 @@ class ProductContainer extends Component {
   _handleCreateProduct() {
     let product = this.state.product;
     product.category_id = this.state.category;
-    product.expire_date = moment(product.expire_date).format('YYYY-MM-DD');
+    product.expire_date = moment(product.expire_date).format('YYYY-MM-DD') || moment().format('YYYY-MM-DD');
     this.props.handeAddProductAPI(product);
     this.setState({
       product: {},
@@ -104,6 +104,7 @@ class ProductContainer extends Component {
 
   render() {
     const { category, product, visibleCreate, visibleEdit } = this.state;
+    const { loading } = this.props.product;
 
     return (
       <Row>
@@ -119,6 +120,7 @@ class ProductContainer extends Component {
         <Row>
           <ProductList
             data={this.props.product.products}
+            loading={loading}
             handleSeleteProduct={this._handleSeleteProduct}
             handleDeleteProduct={this._handleDeleteProduct}
             handleSearchProduct={this._handleSearchProduct}
@@ -127,6 +129,7 @@ class ProductContainer extends Component {
 
         <Row>
           <CreateProduct
+            loading={loading}
             product={product}
             category={category}
             categories={this.props.category.categories}
@@ -136,8 +139,9 @@ class ProductContainer extends Component {
             handleSubmit={this._handleCreateProduct}
             toggoleModal={this._toggleModalCreate}
           />
-          
+
           <EditProduct
+            loading={loading}
             visible={visibleEdit}
             product={product}
             category={category}
