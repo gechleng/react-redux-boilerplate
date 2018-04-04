@@ -10,6 +10,11 @@ import {
   deleteProductsAPI
  } from '../actions/product';
 
+
+ import {
+   fetchCategoryAPI,
+ } from '../actions/category';
+
 import CreateProduct from '../components/products/CreateProduct';
 import EditProduct from '../components/products/EditProduct';
 import ProductList from '../components/products/ProductList';
@@ -35,6 +40,7 @@ class ProductContainer extends Component {
   }
 
   componentWillMount() {
+    this.props.handlGetCategoryAPI()
     this.props.handleGetProductsAPI();
   }
 
@@ -105,12 +111,12 @@ class ProductContainer extends Component {
 
     return (
       <Row>
-        <Row>
+        <Row style={{marginTop: 10}}>
           <Button
             type='primary'
             onClick={()=>this._toggleModalCreate()}
           >
-            Add Category
+            Add Product
           </Button>
         </Row>
 
@@ -161,6 +167,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    handlGetCategoryAPI: (text) => dispatch(fetchCategoryAPI(text)),
     handeAddProductAPI: (data) => dispatch(addProductAPI(data)),
     handleGetProductsAPI: (data) => dispatch(getProductsAPI(data)),
     handleUpdateProductAPI: (data) => dispatch(updateProductsAPI(data)),

@@ -15,7 +15,7 @@ const EditProduct = ({
   toggoleModal
 }) =>
   <div>
-    <Modal title="Create Category"
+    <Modal title="Create Product"
       visible={visible}
       onOk={handleSubmit}
       confirmLoading={false}

@@ -98,7 +98,7 @@ class CategoryContainer extends Component {
 
     return (
       <Row>
-        <Row>
+        <Row style={{marginTop: 10}}>
           <Button
             type='primary'
             onClick={()=>this._toggleModalCreate()}

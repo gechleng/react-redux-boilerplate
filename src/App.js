@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Layout } from 'antd';
+import { Layout, Menu, Icon } from 'antd';
+import { BrowserRouter as Router, Link, Route } from 'react-router-dom'
 
 import logo from './logo.svg';
 
@@ -10,6 +11,11 @@ import SideMenu from './layout/SideMenu';
 import HeaderSide from './layout/HeaderSide';
 import FooterSide from './layout/FooterSide';
 import ContentSide from './layout/ContentSide';
+
+import CategoryContainer from './containers/CategoryContainer';
+import ProductContainer from './containers/ProductContainer';
+
+const { Sider } = Layout;
 
 class App extends Component {
   constructor(props) {
@@ -24,31 +30,56 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App" style={{flex: 1}}>
-        <Layout style={{flex: 1}}>
-          <SideMenu
-            handleSeleteMenu={this._handleSeleteMenu}
-          />
-          <Layout>
-            <HeaderSide />
-            <ContentSide />
-            <FooterSide />
-          </Layout>
-        </Layout>
+      <Router>
+        <div className="App" style={{flex: 1}}>
+          <Layout style={{flex: 1}}>
+            <Sider>
+              <Menu
+                theme="dark"
+                defaultSelectedKeys='1'
+                mode="inline"
+                onSelect={({ item, key, keyPath }) => this._handleSeleteMenu(key)}
+              >
+                  <Menu.Item key="1">
+                    <Link to="/product">product</Link>
+                   </Menu.Item>
+                  <Menu.Item key="2">
+                    <Link to="/category">Category</Link>
+                  </Menu.Item>
+              </Menu>
+            </Sider>
 
-      </div>
+            <Layout>
+              <HeaderSide />
+              <div>
+                <Route exact path="/" component={ProductContainer} />
+                <Route path="/category" component={CategoryContainer} />
+                <Route path="/product" component={ProductContainer} />
+              </div>
+              <ContentSide />
+              <FooterSide />
+            </Layout>
+
+          </Layout>
+        </div>
+      </Router>
     );
   }
 }
 
-// <Row>
-//   <Col span={12} style={{backgroundColor: '#ffffcc', padding: 10}}>
-//     <ProductContainer />
-//   </Col>
-//   <Col span={12} style={{backgroundColor: '#ccffcc', padding: 10}}>
-//     <CategoryContainer />
-//   </Col>
-// </Row>
+
+// <div className="App" style={{flex: 1}}>
+//   <Layout style={{flex: 1}}>
+//     <SideMenu
+//       handleSeleteMenu={this._handleSeleteMenu}
+//     />
+//     <Layout>
+//       <HeaderSide />
+//       <ContentSide />
+//       <FooterSide />
+//     </Layout>
+//   </Layout>
+// </div>
 
 
 export default App;
